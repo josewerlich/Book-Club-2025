@@ -42,6 +42,7 @@ public class MainView
         Console.WriteLine("1 - Magazines Control");
         Console.WriteLine("2 - User Control");
         Console.WriteLine("3 - Shelfs Control");
+        Console.WriteLine("4 - Rental Control");
         Console.WriteLine("E - Exit");
 
         Console.WriteLine();
