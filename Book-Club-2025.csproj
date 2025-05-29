@@ -8,11 +8,4 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
-  <ItemGroup>
-    <Folder Include="FriendsModule\" />
-    <Folder Include="MagazinesModule\" />
-    <Folder Include="BorrowModule\" />
-    <Folder Include="ShelfsModule\" />
-  </ItemGroup>
-
 </Project>
