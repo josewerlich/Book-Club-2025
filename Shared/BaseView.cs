@@ -4,44 +4,44 @@ namespace Book_Club_2025.ConsoleApp.Shared;
 
 public abstract class BaseView
 {
-    protected string nomeEntidade;
-    protected BaseRepository repositorio;
+    protected string entityName;
+    protected BaseRepository repository;
 
-    protected BaseView(string nomeEntidade, BaseRepository repositorio)
+    protected BaseView(string entityName, BaseRepository repository)
     {
-        this.nomeEntidade = nomeEntidade;
-        this.repositorio = repositorio;
+        this.entityName = entityName;
+        this.repository = repository;
     }
 
-    public char ApresentarMenu()
+    public char ShowMeny()
     {
-        ExibirCabecalho();
+        ShowHeader();
 
-        Console.WriteLine($"1 - Cadastro de {nomeEntidade}");
-        Console.WriteLine($"2 - Visualizar {nomeEntidade}s");
-        Console.WriteLine($"3 - Editar {nomeEntidade}");
-        Console.WriteLine($"4 - Excluir {nomeEntidade}");
-        Console.WriteLine($"S - Sair");
+        Console.WriteLine($"1 - Add {entityName}");
+        Console.WriteLine($"2 - Check {entityName}s");
+        Console.WriteLine($"3 - Edit {entityName}");
+        Console.WriteLine($"4 - Delete {entityName}");
+        Console.WriteLine($"S - Exit");
 
         Console.WriteLine();
 
-        Console.Write("Digite uma opção válida: ");
-        char opcaoEscolhida = Console.ReadLine().ToUpper()[0];
+        Console.Write("Select an option: ");
+        char selectedOption = Console.ReadLine().ToUpper()[0];
 
-        return opcaoEscolhida;
+        return selectedOption;
     }
 
-    public void CadastrarRegistro()
+    public void AddRegister()
     {
-        ExibirCabecalho();
+        ShowHeader();
 
-        Console.WriteLine($"Cadastro de {nomeEntidade}");
+        Console.WriteLine($"Register of {entityName}");
 
         Console.WriteLine();
 
-        BaseEntity novoRegistro = ObterDados();
+        BaseEntity newRegister = GetData();
 
-        string erros = novoRegistro.Validate();
+        string erros = newRegister.Validate();
 
         if (erros.Length > 0)
         {
@@ -51,72 +51,72 @@ public abstract class BaseView
             Console.WriteLine(erros);
             Console.ResetColor();
 
-            Console.Write("\nDigite ENTER para continuar...");
+            Console.Write("\nPress Enter to continue...");
             Console.ReadLine();
 
-            CadastrarRegistro();
+            AddRegister();
 
             return;
         }
 
-        repositorio.CadastrarRegistro(novoRegistro);
+       repository.AddRegister(newRegister);
 
-        Console.WriteLine($"\n{nomeEntidade} cadastrado com sucesso!");
+        Console.WriteLine($"\n{entityName} success!");
         Console.ReadLine();
     }
 
-    public void EditarRegistro()
+    public void EditRegister()
     {
-        ExibirCabecalho();
+        ShowHeader();
 
-        Console.WriteLine($"Edição de {nomeEntidade}");
+        Console.WriteLine($"Edit {entityName}");
 
         Console.WriteLine();
 
-        VisualizarRegistros(false);
+        RegisterView(false);
 
-        Console.Write("Digite o id do registro que deseja selecionar: ");
+        Console.Write("Type the ID you want to edit: ");
         int idSelecionado = Convert.ToInt32(Console.ReadLine());
 
         Console.WriteLine();
 
-        BaseEntity registroAtualizado = ObterDados();
+        BaseEntity registroAtualizado = GetData();
 
-        repositorio.EditarRegistro(idSelecionado, registroAtualizado);
+        repository.EditRegister(idSelecionado, registroAtualizado);
 
-        Console.WriteLine($"\n{nomeEntidade} editado com sucesso!");
+        Console.WriteLine($"\n{entityName} editado com sucesso!");
         Console.ReadLine();
     }
 
     public void ExcluirRegistro()
     {
-        ExibirCabecalho();
+        ShowHeader();
 
-        Console.WriteLine($"Exclusão de {nomeEntidade}");
+        Console.WriteLine($"Exclusão de {entityName}");
 
         Console.WriteLine();
 
-        VisualizarRegistros(false);
+        RegisterView(false);
 
         Console.Write("Digite o id do registro que deseja selecionar: ");
         int idSelecionado = Convert.ToInt32(Console.ReadLine());
 
         Console.WriteLine();
 
-        repositorio.ExcluirRegistro(idSelecionado);
+        repository.DeleteRegister(idSelecionado);
 
-        Console.WriteLine($"\n{nomeEntidade} excluído com sucesso!");
+        Console.WriteLine($"\n{entityName} deleted!");
         Console.ReadLine();
     }
 
-    public abstract void VisualizarRegistros(bool exibirCabecalho);
+    public abstract void RegisterView(bool showHeader);
 
-    protected void ExibirCabecalho()
+    protected void ShowHeader()
     {
         Console.Clear();
-        Console.WriteLine($"Gestão de {nomeEntidade}s");
+        Console.WriteLine($"Control of {entityName}s");
         Console.WriteLine();
     }
 
-    protected abstract BaseEntity ObterDados();
+    protected abstract BaseEntity GetData();
 }

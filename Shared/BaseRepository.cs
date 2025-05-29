@@ -5,7 +5,7 @@ public abstract class BaseRepository
     private BaseEntity[] register = new BaseEntity[100];
     private int registerCounter = 0;
 
-    public void DataRegister(BaseEntity newRegister)
+    public void AddRegister(BaseEntity newRegister)
     {
         register[registerCounter] = newRegister;
 
