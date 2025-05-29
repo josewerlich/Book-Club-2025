@@ -2,38 +2,38 @@
 
 public abstract class BaseRepository
 {
-    private BaseEntity[] registros = new BaseEntity[100];
-    private int contadorRegistros = 0;
+    private BaseEntity[] register = new BaseEntity[100];
+    private int registerCounter = 0;
 
-    public void CadastrarRegistro(BaseEntity novoRegistro)
+    public void DataRegister(BaseEntity newRegister)
     {
-        registros[contadorRegistros] = novoRegistro;
+        register[registerCounter] = newRegister;
 
-        contadorRegistros++;
+        registerCounter++;
     }
 
-    public bool EditarRegistro(int idSelecionado, BaseEntity registroAtualizado)
+    public bool EditRegister(int idSelected, BaseEntity registerUpdate)
     {
-        BaseEntity registroSelecionado = SelecionarRegistroPorId(idSelecionado);
+        BaseEntity selectedRegister = SelectRegisterID(idSelected);
 
-        if (registroSelecionado == null)
+        if (selectedRegister == null)
             return false;
 
-        registroSelecionado.UpdateRegister(registroAtualizado);
+        selectedRegister.UpdateRegister(registerUpdate);
 
         return true;
     }
 
-    public bool ExcluirRegistro(int idSelecionado)
+    public bool DeleteRegister(int idSelecionado)
     {
-        for (int i = 0; i < registros.Length; i++)
+        for (int i = 0; i < register.Length; i++)
         {
-            if (registros[i] == null)
+            if (register[i] == null)
                 continue;
 
-            else if (registros[i].id == idSelecionado)
+            else if (register[i].id == idSelecionado)
             {
-                registros[i] = null;
+                register[i] = null;
 
                 return true;
             }
@@ -42,22 +42,22 @@ public abstract class BaseRepository
         return false;
     }
 
-    public BaseEntity[] SelecionarRegistros()
+    public BaseEntity[] SelectRegister()
     {
-        return registros;
+        return register;
     }
 
-    public BaseEntity SelecionarRegistroPorId(int idSelecionado)
+    public BaseEntity SelectRegisterID(int idSelected)
     {
-        for (int i = 0; i < registros.Length; i++)
+        for (int i = 0; i < register.Length; i++)
         {
-            BaseEntity registro = registros[i];
+            BaseEntity Register = register[i];
 
-            if (registro == null)
+            if (Register == null)
                 continue;
 
-            if (registro.id == idSelecionado)
-                return registro;
+            if (Register.id == idSelected)
+                return Register;
         }
 
         return null;
