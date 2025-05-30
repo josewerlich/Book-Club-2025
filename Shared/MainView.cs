@@ -1,32 +1,26 @@
 ﻿
+using Book_Club_2025.ShelfsModule;
+
 namespace Book_Club_2025.ConsoleApp.Shared;
 
 public class MainView
 {
     private char userOption;
 
-    //private RepositorioFabricante repositorioFabricante;
-    //private RepositorioEquipamento repositorioEquipamento;
-    //private RepositorioChamado repositorioChamado;
+    private ShelfsRepository shelfsRepository;
+   
 
-    //private TelaFabricante telaFabricante;
-    //private TelaEquipamento telaEquipamento;
-    //private TelaChamado telaChamado;
+    private ShelfsView shelfsView;
+ 
 
     public MainView()
     {
-        //repositorioFabricante = new RepositorioFabricante();
-        //repositorioEquipamento = new RepositorioEquipamento();
-        //repositorioChamado = new RepositorioChamado();
+        shelfsRepository = new ShelfsRepository();
+  
 
-        //telaFabricante = new TelaFabricante(repositorioFabricante);
+        shelfsView = new ShelfsView(shelfsRepository);
 
-        //telaEquipamento = new TelaEquipamento(
-          //repositorioEquipamento,
-          //repositorioFabricante
-      //);
-
-      //telaChamado = new TelaChamado(repositorioChamado, repositorioEquipamento);
+ 
     }
 
     public void ShowMainMenu()
@@ -51,17 +45,11 @@ public class MainView
         userOption = Console.ReadLine()[0];
     }
 
-    //public BaseView GetView()
-    //{
-    //    if (userOption == '1')
-    //        return magazineView;
+    public BaseView GetView()
+    {
+        if (userOption == '3')
+            return shelfsView;
 
-    //    else if (userOption == '2')
-    //        return userView;
-
-    //    else if (userOption == '3')
-    //        return shelfsView;
-
-    //    return null;
-    //}
+        return null;
+    }
 }
