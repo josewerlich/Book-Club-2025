@@ -13,7 +13,7 @@ public abstract class BaseView
         this.repository = repository;
     }
 
-    public char ShowMeny()
+    public char ShowMenu()
     {
         ShowHeader();
 
@@ -61,7 +61,7 @@ public abstract class BaseView
 
        repository.AddRegister(newRegister);
 
-        Console.WriteLine($"\n{entityName} success!");
+        Console.WriteLine($"\n{entityName} registered with success!");
         Console.ReadLine();
     }
 
@@ -69,11 +69,11 @@ public abstract class BaseView
     {
         ShowHeader();
 
-        Console.WriteLine($"Edit {entityName}");
+        Console.WriteLine($"Edited register of the {entityName}");
 
         Console.WriteLine();
 
-        RegisterView(false);
+        ViewRegister(false);
 
         Console.Write("Type the ID you want to edit: ");
         int idSelecionado = Convert.ToInt32(Console.ReadLine());
@@ -84,21 +84,21 @@ public abstract class BaseView
 
         repository.EditRegister(idSelecionado, registroAtualizado);
 
-        Console.WriteLine($"\n{entityName} editado com sucesso!");
+        Console.WriteLine($"\n{entityName} updated!");
         Console.ReadLine();
     }
 
-    public void ExcluirRegistro()
+    public void DeleteRegister()
     {
         ShowHeader();
 
-        Console.WriteLine($"Exclusão de {entityName}");
+        Console.WriteLine($"Delete {entityName}");
 
         Console.WriteLine();
 
-        RegisterView(false);
+        ViewRegister(false);
 
-        Console.Write("Digite o id do registro que deseja selecionar: ");
+        Console.Write("Type the ID you want to delete: ");
         int idSelecionado = Convert.ToInt32(Console.ReadLine());
 
         Console.WriteLine();
@@ -109,7 +109,7 @@ public abstract class BaseView
         Console.ReadLine();
     }
 
-    public abstract void RegisterView(bool showHeader);
+    public abstract void ViewRegister(bool showHeader);
 
     protected void ShowHeader()
     {

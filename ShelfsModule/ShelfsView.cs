@@ -12,7 +12,7 @@ namespace Book_Club_2025.ShelfsModule
         {
             this.shelfsRepository = shelfsRepository;
         }
-        public override void RegisterView(bool showHeader)
+        public override void ViewRegister(bool showHeader)
         {
             if (showHeader == true)
                 ShowHeader();
