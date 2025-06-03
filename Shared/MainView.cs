@@ -1,4 +1,5 @@
 ﻿
+using Book_Club_2025.MagazinesModule;
 using Book_Club_2025.ShelfsModule;
 
 namespace Book_Club_2025.ConsoleApp.Shared;
@@ -8,19 +9,20 @@ public class MainView
     private char userOption;
 
     private ShelfsRepository shelfsRepository;
-   
-
     private ShelfsView shelfsView;
+    private MagazineRepository magazineRepository;
+    private MagazineView magazineView;
+    
  
 
     public MainView()
     {
-        shelfsRepository = new ShelfsRepository();
-  
+        magazineRepository = new MagazineRepository();
+        magazineView = new MagazineView(magazineRepository);
 
+        shelfsRepository = new ShelfsRepository();
         shelfsView = new ShelfsView(shelfsRepository);
 
- 
     }
 
     public void ShowMainMenu()
@@ -47,6 +49,9 @@ public class MainView
 
     public BaseView GetView()
     {
+        if (userOption == '1')
+            return magazineView;
+
         if (userOption == '3')
             return shelfsView;
 
