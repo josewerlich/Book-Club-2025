@@ -46,23 +46,23 @@ public class MagazineControl : BaseEntity
     }
     public string Borrow()
     {
-        if (borrowingStatus == "Borrowed")
+        if (borrowingStatus == "borrowed")
         {
             return $"The magazine \"{title}\" is already borrowed.";
         }
 
-        borrowingStatus = "Borrowed";
+        borrowingStatus = "borrowed";
         return $"The magazine \"{title}\" has been successfully borrowed.";
     }
 
     public string Return()
     {
-        if (borrowingStatus == "Available")
+        if (borrowingStatus == "available")
         {
             return $"The magazine \"{title}\" is already available.";
         }
 
-        borrowingStatus = "Available";
+        borrowingStatus = "available";
         return $"The magazine \"{title}\" has been successfully returned.";
     }
 }

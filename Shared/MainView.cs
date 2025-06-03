@@ -1,4 +1,5 @@
 ﻿
+using Book_Club_2025.FriendsModule;
 using Book_Club_2025.MagazinesModule;
 using Book_Club_2025.ShelfsModule;
 
@@ -10,6 +11,8 @@ public class MainView
 
     private ShelfsRepository shelfsRepository;
     private ShelfsView shelfsView;
+    private FriendsRepository friendsRepository;
+    private FriendsView friendsView;    
     private MagazineRepository magazineRepository;
     private MagazineView magazineView;
     
@@ -19,6 +22,9 @@ public class MainView
     {
         magazineRepository = new MagazineRepository();
         magazineView = new MagazineView(magazineRepository);
+
+        friendsRepository = new FriendsRepository();
+        friendsView = new FriendsView(friendsRepository);
 
         shelfsRepository = new ShelfsRepository();
         shelfsView = new ShelfsView(shelfsRepository);
@@ -51,6 +57,9 @@ public class MainView
     {
         if (userOption == '1')
             return magazineView;
+
+        if (userOption == '2')
+            return friendsView;
 
         if (userOption == '3')
             return shelfsView;
