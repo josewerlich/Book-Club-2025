@@ -31,7 +31,7 @@ public abstract class BaseView
         return selectedOption;
     }
 
-    public void AddRegister()
+    public virtual void AddRegister()
     {
         ShowHeader();
 
@@ -65,7 +65,7 @@ public abstract class BaseView
         Console.ReadLine();
     }
 
-    public void EditRegister()
+    public virtual void EditRegister()
     {
         ShowHeader();
 

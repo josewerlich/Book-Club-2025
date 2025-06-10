@@ -5,6 +5,7 @@ namespace Book_Club_2025.FriendsModule
 {
     public class FriendsControl : BaseEntity
     {
+
         public int id;
         public string name;
         public string responsible;
