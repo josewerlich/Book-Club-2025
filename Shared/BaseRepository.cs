@@ -2,8 +2,8 @@
 
 public abstract class BaseRepository
 {
-    private BaseEntity[] register = new BaseEntity[100];
-    private int registerCounter = 0;
+    protected BaseEntity[] register = new BaseEntity[100];
+    protected int registerCounter = 0;
 
     public void AddRegister(BaseEntity newRegister)
     {
