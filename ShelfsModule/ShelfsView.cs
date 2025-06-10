@@ -51,12 +51,18 @@ namespace Book_Club_2025.ShelfsModule
             Console.Write("Type the Color: ");
             string color = Console.ReadLine();
 
-            Console.Write("Type the quantity of borrowing days: ");
-            string borrowingDays = Console.ReadLine();
+            Console.Write("Type the quantity of borrowing days (optional): ");
+            bool conversion = int.TryParse(Console.ReadLine(), out int borrowingDays);
 
-            ShelfsControl shelfsControl = new ShelfsControl(label, color, borrowingDays);
 
-            return shelfsControl;
+            ShelfsControl shelfsControl;
+
+            if (conversion)
+                shelfsControl = new ShelfsControl(label, color, borrowingDays);
+            else
+                shelfsControl = new ShelfsControl(label, color);
+
+                return shelfsControl;
         }
     }
 

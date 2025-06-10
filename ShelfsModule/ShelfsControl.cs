@@ -8,9 +8,15 @@ public class ShelfsControl : BaseEntity
     public int id;
     public string label;
     public string color;
-    public string borrowingDays;
+    public int borrowingDays;
 
-    public ShelfsControl(string label, string color, string borrowingDays)
+    public ShelfsControl(string label, string color)
+    {
+        this.label = label;
+        this.color = color;
+        this.borrowingDays = 7;
+    }
+    public ShelfsControl(string label, string color, int borrowingDays)
     {
         this.label = label;
         this.color = color;
