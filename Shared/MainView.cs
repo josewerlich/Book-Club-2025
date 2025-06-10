@@ -17,7 +17,7 @@ public class MainView
     private MagazineRepository magazineRepository;
     private MagazineView magazineView;
     private BorrowRepository borrowRepository;
-    private BorrowView borrowView;
+    private BorrowingView borrowView;
     
  
 
