@@ -1,59 +1,43 @@
 ﻿using Book_Club_2025.ConsoleApp.Shared;
 using Book_Club_2025.FriendsModule;
-using Book_Club_2025.ShelfsModule;
+using Book_Club_2025.MagazinesModule;
+
 
 namespace Book_Club_2025.BorrowModule
 {
     public class BorrowControl : BaseEntity
     {
-        public int id;
-        public string friend;
-        public string magazine;
-        public string date;
-        public string status;
+        public FriendsControl FriendsControl;
+        public MagazineControl MagazineControl;
+        public DateTime BorrowingDate;
+        public DateTime ReturningDate;
+        public string Status;
 
-        public BorrowControl(string friend, string magazine, string date, string status)
+        public BorrowControl(FriendsControl friendsControl, MagazineControl magazineControl)
         {
-            this.friend = friend;
-            this.magazine = magazine;
-            this.date = date;
-            this.status = status;
-        }
-
-     
-
-        public override string Validate()
-        {
-            string errors = "";
-
-            if (string.IsNullOrWhiteSpace(friend))
-                errors += "The field \"Friend\" is required.\n";
-
-            else if (friend.Length < 3)
-                errors += "The field \"Friend\" needs at least 3 characters.\n";
-
-            if (magazine.Length < 3)
-                errors += "The field \"Magazine\" needs at least 3 characters.\n";
-
-            if (string.IsNullOrWhiteSpace(date))
-                errors += "The field \"Date\" is required. \n";
-
-            if (string.IsNullOrWhiteSpace(status))
-                errors += "The field \"Status\" is required. \n";
-
-            return errors;
+            FriendsControl = friendsControl;
+            MagazineControl = magazineControl;
+            BorrowingDate = DateTime.Now;
+            ReturningDate = BorrowingDate.AddDays(MagazineControl.ShelfsControl.borrowingDays);
+            Status = "Available";
         }
         public override void UpdateRegister(BaseEntity registerUpdated)
         {
-            BorrowControl borrowControl = (BorrowControl)registerUpdated;
-
-            this.friend = borrowControl.friend;
-            this.magazine = borrowControl.magazine;
-            this.date = borrowControl.date;
-            this.status = borrowControl.status;
-        
+            Status = "Concluído";
         }
+        public override string Validate()
+        {
+            string errors = string.Empty;
+
+            if (FriendsControl == null)
+                errors += "The field \"Friend\" is required.";
+
+            if (MagazineControl == null)
+                errors += "The field \"Magazine\" is required.";
+
+            return errors;
+        }
+        
     }
-    
     
 }
