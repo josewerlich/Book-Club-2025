@@ -5,13 +5,15 @@ using Book_Club_2025.MagazinesModule;
 
 namespace Book_Club_2025.BorrowModule
 {
-    public class BorrowingView : BaseView
+    public class BorrowView : BaseView
     {
         private BorrowRepository borrowRepository;
         private FriendsRepository friendsRepository;
         private MagazineRepository magazineRepository;
 
-        public BorrowingView(BorrowRepository repository,FriendsRepository friendsRepository, MagazineRepository magazineRepository) 
+     
+
+        public BorrowView(BorrowRepository repository, FriendsRepository friendsRepository, MagazineRepository magazineRepository)
             : base("Borrowing", repository)
         {
             borrowRepository = repository;
@@ -19,7 +21,7 @@ namespace Book_Club_2025.BorrowModule
             this.magazineRepository = magazineRepository;
         }
 
-        public virtual char ShowMenu()
+        public override char ShowMenu()
         {
             ShowHeader();
 
@@ -100,7 +102,7 @@ namespace Book_Club_2025.BorrowModule
         {
             ShowHeader();
 
-            Console.WriteLine($"Retunr of {entityName}");
+            Console.WriteLine($"Return of {entityName}");
 
             Console.WriteLine();
 
@@ -138,7 +140,7 @@ namespace Book_Club_2025.BorrowModule
             selectBorrowing.MagazineControl.Status = "Available";
 
             Console.ForegroundColor = ConsoleColor.Green;
-            Console.WriteLine($"\n{entityName} completed!");
+            Console.WriteLine($"\n{entityName} returned!");
             Console.ResetColor();
 
             Console.ReadLine();
@@ -229,17 +231,17 @@ namespace Book_Club_2025.BorrowModule
 
             for (int i = 0; i < borrowing.Length; i++)
             {
-                BorrowControl e = (BorrowControl)borrowing[i];
+                BorrowControl b = (BorrowControl)borrowing[i];
 
-                if (e == null)
+                if (b == null)
                     continue;
 
-                if (e.Status == "Late")
+                if (b.Status == "Late")
                     Console.ForegroundColor = ConsoleColor.DarkYellow;
 
                 Console.WriteLine(
                  "{0, -5} | {1, -15} | {2, -15} | {3, -20} | {4, -25} | {5, -15}",
-                    e.id, e.FriendsControl.name, e.MagazineControl.Title, e.BorrowingDate.ToShortDateString(), e.ReturningDate.ToShortDateString(), e.Status
+                    b.id, b.FriendsControl.name, b.MagazineControl.Title, b.BorrowingDate.ToShortDateString(), b.ReturningDate.ToShortDateString(), b.Status
                 );
 
                 Console.ResetColor();

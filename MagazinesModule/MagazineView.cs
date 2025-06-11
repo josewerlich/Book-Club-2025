@@ -8,11 +8,13 @@ namespace Book_Club_2025.MagazinesModule
     class MagazineView : BaseView
     {
         private MagazineRepository magazineRepository;
+        private ShelfsRepository shelfsRepository;
 
-        public MagazineView(MagazineRepository magazineRepository)
+        public MagazineView(MagazineRepository magazineRepository, ShelfsRepository shelfsRepository)
         : base("Magazine", magazineRepository)
         {
             this.magazineRepository = magazineRepository;
+            this.shelfsRepository = shelfsRepository;   
         }
         public override void ViewRegister(bool showHeader)
         {
@@ -38,7 +40,7 @@ namespace Book_Club_2025.MagazinesModule
                     continue;
 
                 Console.WriteLine(
-                   "{0, -10} | {1, -20} | {2, -30} | {3, -16} | {4, -10}",
+                   "{0, -10} | {1, -20} | {2, -30} | {3, -15} | {4, -10} | {5, -20}",
                     m.id, m.Title, m.Edition, m.PublishedYear, m.ShelfsControl.label, m.Status
                 );
             }
@@ -53,16 +55,15 @@ namespace Book_Club_2025.MagazinesModule
             Console.Write("Type the Edition: ");
             int edition = Convert.ToInt32(Console.ReadLine());
 
-            Console.Write("Type the Edition: ");
+            Console.Write("Type the Year is was published: ");
             int publishedYear = Convert.ToInt32(Console.ReadLine());
 
             ViewRegister();
 
-
-            Console.Write("\nDigite o ID da caixa selecionada: ");
+            Console.Write("\nType the ID of the shelf: ");
             int ShelfID = Convert.ToInt32(Console.ReadLine());
 
-            ShelfsControl selectedShelf = (ShelfsControl)magazineRepository.SelectRegisterID(ShelfID);
+            ShelfsControl selectedShelf = (ShelfsControl)shelfsRepository.SelectRegisterID(ShelfID);
 
             MagazineControl magazine = new MagazineControl(title, edition, publishedYear, selectedShelf);
 
@@ -81,7 +82,7 @@ namespace Book_Club_2025.MagazinesModule
                 "Id", "Label", "Color", "Borrowing Days"
             );
 
-            BaseEntity[] shelfs = magazineRepository.SelectRegister();
+            BaseEntity[] shelfs = shelfsRepository.SelectRegister();
 
             for (int i = 0; i < shelfs.Length; i++)
             {

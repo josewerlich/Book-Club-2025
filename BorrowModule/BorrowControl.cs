@@ -19,11 +19,11 @@ namespace Book_Club_2025.BorrowModule
             MagazineControl = magazineControl;
             BorrowingDate = DateTime.Now;
             ReturningDate = BorrowingDate.AddDays(MagazineControl.ShelfsControl.borrowingDays);
-            Status = "Available";
+            Status = "Open";
         }
         public override void UpdateRegister(BaseEntity registerUpdated)
         {
-            Status = "Concluído";
+            Status = "Completed";
         }
         public override string Validate()
         {

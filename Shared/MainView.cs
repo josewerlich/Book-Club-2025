@@ -12,31 +12,42 @@ public class MainView
 
     private ShelfsRepository shelfsRepository;
     private ShelfsView shelfsView;
+
     private FriendsRepository friendsRepository;
     private FriendsView friendsView;    
+
     private MagazineRepository magazineRepository;
     private MagazineView magazineView;
+
     private BorrowRepository borrowRepository;
-    private BorrowingView borrowView;
+    private BorrowView borrowView;
     
  
 
     public MainView()
     {
         magazineRepository = new MagazineRepository();
-        magazineView = new MagazineView(magazineRepository);
-
+        borrowRepository = new BorrowRepository();
         friendsRepository = new FriendsRepository();
-        friendsView = new FriendsView(friendsRepository);
-
         shelfsRepository = new ShelfsRepository();
-        shelfsView = new ShelfsView(shelfsRepository);
 
-        borrowRepository = new BorrowRepository ();
-        borrowView = new BorrowView(borrowRepository);
+
+        shelfsView = new ShelfsView(shelfsRepository);
+        friendsView = new FriendsView(friendsRepository);
+        magazineView = new MagazineView(magazineRepository, shelfsRepository);
+        borrowView = new BorrowView(borrowRepository, friendsRepository, magazineRepository);
+
+        FriendsControl friend = new FriendsControl("Rodri", "Pepe", "49 99999-3333");
+        friendsRepository.AddRegister(friend);
+
+        ShelfsControl shelf = new ShelfsControl("Comedy", "Red");
+        shelfsRepository.AddRegister(shelf);
+
+        MagazineControl magazine = new MagazineControl("The Google", 2, 2020, shelf);
+        magazineRepository.AddRegister(magazine);
+
 
     }
-
     public void ShowMainMenu()
     {
         Console.Clear();
@@ -50,7 +61,7 @@ public class MainView
         Console.WriteLine("1 - Magazines Control");
         Console.WriteLine("2 - User Control");
         Console.WriteLine("3 - Shelfs Control");
-        Console.WriteLine("4 - Rental Control");
+        Console.WriteLine("4 - Borrowing Control");
         Console.WriteLine("E - Exit");
 
         Console.WriteLine();

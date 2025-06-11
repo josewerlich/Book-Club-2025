@@ -13,7 +13,7 @@ public abstract class BaseView
         this.repository = repository;
     }
 
-    public char ShowMenu()
+    public virtual char ShowMenu()
     {
         ShowHeader();
 
@@ -21,7 +21,7 @@ public abstract class BaseView
         Console.WriteLine($"2 - Check {entityName}s");
         Console.WriteLine($"3 - Edit {entityName}");
         Console.WriteLine($"4 - Delete {entityName}");
-        Console.WriteLine($"S - Exit");
+        Console.WriteLine($"E - Exit");
 
         Console.WriteLine();
 
@@ -76,13 +76,13 @@ public abstract class BaseView
         ViewRegister(false);
 
         Console.Write("Type the ID you want to edit: ");
-        int idSelecionado = Convert.ToInt32(Console.ReadLine());
+        int selectedID = Convert.ToInt32(Console.ReadLine());
 
         Console.WriteLine();
 
-        BaseEntity registroAtualizado = GetData();
+        BaseEntity updatedRegister = GetData();
 
-        repository.EditRegister(idSelecionado, registroAtualizado);
+        repository.EditRegister(selectedID, updatedRegister);
 
         Console.WriteLine($"\n{entityName} updated!");
         Console.ReadLine();
@@ -99,11 +99,11 @@ public abstract class BaseView
         ViewRegister(false);
 
         Console.Write("Type the ID you want to delete: ");
-        int idSelecionado = Convert.ToInt32(Console.ReadLine());
+        int selectedID = Convert.ToInt32(Console.ReadLine());
 
         Console.WriteLine();
 
-        repository.DeleteRegister(idSelecionado);
+        repository.DeleteRegister(selectedID);
 
         Console.WriteLine($"\n{entityName} deleted!");
         Console.ReadLine();

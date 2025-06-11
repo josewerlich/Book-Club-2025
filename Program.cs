@@ -1,8 +1,9 @@
-﻿using Book_Club_2025.ConsoleApp.Shared;
+﻿using Book_Club_2025.BorrowModule;
+using Book_Club_2025.ConsoleApp.Shared;
 
 namespace Book_Club_2025
 {
-    internal class Program
+    class Program
     {
         static void Main(string[] args)
         {
@@ -22,24 +23,47 @@ namespace Book_Club_2025
                 if (selectedOption == 'S')
                     break;
 
-                switch (selectedOption)
+                if (selectedView is BorrowView)
                 {
-                    case '1':
-                        selectedView.AddRegister();
-                        break;
+                    BorrowView borrowView = (BorrowView)selectedView;
 
-                    case '2':
-                        selectedView.ViewRegister(true);
-                        break;
+                    switch (selectedOption)
+                    {
+                        case '1':
+                            borrowView.BorrowingRegister();
+                            break;
 
-                    case '3':
-                        selectedView.EditRegister();
-                        break;
+                        case '2':
+                            borrowView.ReturnMagazine();
+                            break;
 
-                    case '4':
-                        selectedView.DeleteRegister();
-                        break;
+                        case '3':
+                            borrowView.ViewRegister(true);
+                            break;
+                    }
+                }
+                else
+                {
 
+                    switch (selectedOption)
+                    {
+                        case '1':
+                            selectedView.AddRegister();
+                            break;
+
+                        case '2':
+                            selectedView.ViewRegister(true);
+                            break;
+
+                        case '3':
+                            selectedView.EditRegister();
+                            break;
+
+                        case '4':
+                            selectedView.DeleteRegister();
+                            break;
+
+                    }
                 }
             }
         }
